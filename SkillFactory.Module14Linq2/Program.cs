@@ -21,15 +21,8 @@ namespace SkillFactory.Module14Linq2
  
        static string [] GetAllStudents( Classroom [] classes )
        {
-            var students = (from classroom in classes
-                            select classroom.Students);
-            string[] result = Array.Empty<string>();
-            foreach ( var studentList in students )
-            {
-                result = result.Union(studentList).ToArray();
-            }
-            return result;
-            
+            var students = classes.SelectMany(classroom => classroom.Students).ToArray();
+            return students;
        }
       
        public class Classroom
